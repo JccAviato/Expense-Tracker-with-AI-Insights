@@ -1,0 +1,9 @@
+body { background: #0b0c10; color: #e6e6e6; }
+.card { background: #1f2833; border: none; }
+.navbar { background: #0b0c10 !important; }
+a, .nav-link, .navbar-brand { color: #66fcf1 !important; }
+.btn-primary, .btn-success { background: #45a29e; border-color: #45a29e; }
+.table { color: #e6e6e6; }
+.table thead th { color: #66fcf1; }
+.alert { background: #162029; color: #e6e6e6; border: 1px solid #2b3948; }
+input.form-control { background: #15202b; color: #e6e6e6; border: 1px solid #2b3948; }

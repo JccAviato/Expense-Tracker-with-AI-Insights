@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row mb-3">
+  <div class="col-md-12">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h4 class="card-title">Summary</h4>
+        <p>Total recorded: <strong>${{ '%.2f'|format(insights.summary.total) }}</strong> across <strong>{{ insights.summary.months }}</strong> month(s).</p>
+        <p>Top category: <strong>{{ insights.summary.top_category or '—' }}</strong></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-7">
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h5 class="card-title">Per-Category Insights</h5>
+        <table class="table table-sm table-striped">
+          <thead><tr><th>Category</th><th>Total</th><th>Last Month</th><th>Forecast</th><th>Cap</th></tr></thead>
+          <tbody>
+            {% for cat, data in insights.per_category.items() %}
+              <tr>
+                <td>{{ cat }}</td>
+                <td>${{ '%.2f'|format(data.total) }}</td>
+                <td>${{ '%.2f'|format(data.last_month) }}</td>
+                <td>${{ '%.2f'|format(data.forecast_next) }}</td>
+                <td>${{ '%.2f'|format(data.suggested_cap) }}</td>
+              </tr>
+            {% else %}
+              <tr><td colspan="5" class="text-muted">No data yet.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h5 class="card-title">Recommendations</h5>
+        <ul>
+          {% for s in insights.suggestions %}
+            <li>{{ s }}</li>
+          {% else %}
+            <li class="text-muted">Add more expenses to see recommendations.</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Category Tips</h5>
+        <ul>
+          {% for cat, tip in category_tips.items() %}
+            <li><strong>{{ cat }}:</strong> {{ tip }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
